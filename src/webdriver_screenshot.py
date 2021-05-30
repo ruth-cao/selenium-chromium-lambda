@@ -5,6 +5,9 @@ import logging
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 logger = logging.getLogger()
 
@@ -108,11 +111,13 @@ class WebDriverScreenshot:
         password.send_keys(pwd)
         password.send_keys(Keys.RETURN)
 
-        driver.get("https://parents.genesisedu.com/ftlee/parents?tab1=studentdata&tab2=forms&tab3=fill&studentid=29060860&formId=CE0A72E9B67E45DE8FDF5124EF25D83F&action=form")        
-        driver.save_screenshot(filename)
-
-        logger.info('Screenshot saved after going to the form')
-        driver.quit()
+        try:
+            form = WebDriverWait(driver, 5).until(
+                EC.presence_of_all_elements_located((By.NAME, "frmHome"))
+            )
+            logger.info(form)
+        finally:
+           driver.quit()
 
     def close(self):
         # Remove specific tmp dir of this "run"
