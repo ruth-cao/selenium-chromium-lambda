@@ -24,12 +24,11 @@ Parameters:
     Email:
         Description: email to login
         Type: String
-        Default: ""
 
     Pwd:
         Description: pwd to login
         Type: String
-        Default: ""
+        
 Resources:
 
     ScreenshotFunctionRole:
