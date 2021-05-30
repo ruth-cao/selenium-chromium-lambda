@@ -4,6 +4,7 @@ import uuid
 import logging
 
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 logger = logging.getLogger()
 
@@ -88,7 +89,7 @@ class WebDriverScreenshot:
         driver.quit()
         return height
 
-    def save_screenshot(self, url, filename, width=1280, height=None):
+    def save_screenshot(self, url, email, pwd, filename, width=1280, height=None):
         if height is None:
             height = self.__get_correct_height(url, width=width)
 
@@ -99,7 +100,18 @@ class WebDriverScreenshot:
         driver = webdriver.Chrome(chrome_options=chrome_options)
         logger.info('Using Chromium version: {}'.format(driver.capabilities['browserVersion']))
         driver.get(url)
+
+        user = driver.find_element_by_id("j_username")
+        user.send_keys(email)
+
+        password = driver.find_element_by_id("j_password")
+        password.send_keys(pwd)
+        password.send_keys(Keys.RETURN)
+
+        driver.get("https://parents.genesisedu.com/ftlee/parents?tab1=studentdata&tab2=forms&tab3=fill&studentid=29060860&formId=CE0A72E9B67E45DE8FDF5124EF25D83F&action=form")        
         driver.save_screenshot(filename)
+
+        logger.info('Screenshot saved after going to the form')
         driver.quit()
 
     def close(self):

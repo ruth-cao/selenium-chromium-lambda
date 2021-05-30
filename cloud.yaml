@@ -9,7 +9,7 @@ Parameters:
     WebSite:
         Description: Take screenshot of this URL 
         Type: String  
-        Default: "https://www.google.it"
+        Default: "https://parents.genesisedu.com/ftlee/parents?tab1=studentdata&tab2=studentsummary&studentid=29060860&action=form"
 
     SourceFolder:
         Description: folder in S3 Bucket where source files are located (lambda)
@@ -20,7 +20,16 @@ Parameters:
         Description: folder in S3 Bucket where store screenshots
         Type: String
         Default: "screenshots"
+        
+    Email:
+        Description: email to login
+        Type: String
+        Default: ""
 
+    Pwd:
+        Description: pwd to login
+        Type: String
+        Default: ""
 Resources:
 
     ScreenshotFunctionRole:
@@ -98,4 +107,3 @@ Resources:
                 S3Key: 
                     Fn::Sub: '${SourceFolder}/SeleniumChromiumLayer.zip'
             Description: Selenium and Chromium Layer for Python3.6
-
