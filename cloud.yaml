@@ -28,7 +28,7 @@ Parameters:
     Pwd:
         Description: pwd to login
         Type: String
-        
+
 Resources:
 
     ScreenshotFunctionRole:
@@ -84,6 +84,10 @@ Resources:
                         Ref: BucketName
                     DESTPATH:
                         Ref: ScreenshotsFolder
+                    Email:
+                        Ref: Email
+                    Pwd:
+                        Ref: Pwd
             Timeout: 60
             MemorySize: 2048
             Code:
