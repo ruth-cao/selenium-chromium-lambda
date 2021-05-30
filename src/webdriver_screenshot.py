@@ -8,6 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from datetime import datetime
 
 logger = logging.getLogger()
 
@@ -78,6 +79,7 @@ class WebDriverScreenshot:
         chrome_options.add_argument('--data-path={}'.format(self._tmp_folder + '/data-path'))
         chrome_options.add_argument('--homedir={}'.format(self._tmp_folder))
         chrome_options.add_argument('--disk-cache-dir={}'.format(self._tmp_folder + '/cache-dir'))
+        chrome_options.add_argument('--user-agent=Chrome/90')
 
         chrome_options.binary_location = "/opt/bin/chromium" 
 
@@ -115,7 +117,20 @@ class WebDriverScreenshot:
             form = WebDriverWait(driver, 5).until(
                 EC.presence_of_all_elements_located((By.NAME, "frmHome"))
             )
-            logger.info(form)
+            
+            # driver.get("https://parents.genesisedu.com/ftlee/parents?tab1=studentdata&tab2=forms&tab3=fill&studentid=29060860&formId=CE0A72E9B67E45DE8FDF5124EF25D83F&action=form")
+            # driver.find_element_by_xpath("//select[@id='fldQuestion_48159F9B94B2409BAF899C57039D3759_C3E2410FA55F43CA84D9FA6426910A93']/option[text()='Yes']").click()
+            # update = driver.find_element_by_class_name("saveButton")
+            # update.click()
+
+            # forms = WebDriverWait(driver, 5).until(
+            #     EC.presence_of_all_elements_located((By.NAME, "cellCenter"))
+            # )
+            
+            # currentDate = datetime.now().strftime("%m/%d/%Y").lstrip("0").replace(" 0", " ")
+            # logger.info('result contains the latest date: {}'.format(currentDate in forms[2].get_attribute('innerHTML')))
+
+            driver.save_screenshot(filename)
         finally:
            driver.quit()
 
