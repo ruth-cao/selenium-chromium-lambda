@@ -42,10 +42,6 @@ create-stack:
 	aws s3 cp deploy.zip s3://${BUCKET}/src/ScreenshotFunction.zip
 	aws cloudformation create-stack --stack-name LambdaScreenshot --template-body file://cloud.yaml --parameters ParameterKey=BucketName,ParameterValue=${BUCKET} ParameterKey=Email,ParameterValue=${Email} ParameterKey=Pwd,ParameterValue=${Pwd} --capabilities CAPABILITY_IAM
 
-## update code and rebuild the enire stack
-## usage:	make BUCKET=your_bucket_name Email=your_email Pwd=your_pwd clean-build
-clean-build:
-    aws s3 cp layer.zip s3://${BUCKET}/src/SeleniumChromiumLayer.zip
-	aws s3 cp deploy.zip s3://${BUCKET}/src/ScreenshotFunction.zip
+## delete existing stack
+delete-stack: 
 	aws cloudformation delete-stack --stack-name LambdaScreenshot
-	aws cloudformation create-stack --stack-name LambdaScreenshot --template-body file://cloud.yaml --parameters ParameterKey=BucketName,ParameterValue=${BUCKET} ParameterKey=Email,ParameterValue=${Email} ParameterKey=Pwd,ParameterValue=${Pwd} --capabilities CAPABILITY_IAM
