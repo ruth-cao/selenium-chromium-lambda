@@ -128,7 +128,8 @@ class WebDriverScreenshot:
             )
             
             currentDate = datetime.now().strftime("%m/%d/%Y").lstrip("0").replace(" 0", " ")
-            logger.info('result contains the latest date: {}'.format(currentDate in forms[2].get_attribute('innerHTML')))
+            logger.info(currentDate)
+            logger.info(forms[2].get_attribute('innerHTML'))
 
             driver.save_screenshot(filename)
         finally:
