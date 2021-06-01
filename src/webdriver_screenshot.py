@@ -118,17 +118,17 @@ class WebDriverScreenshot:
                 EC.presence_of_all_elements_located((By.NAME, "frmHome"))
             )
             
-            # driver.get("https://parents.genesisedu.com/ftlee/parents?tab1=studentdata&tab2=forms&tab3=fill&studentid=29060860&formId=CE0A72E9B67E45DE8FDF5124EF25D83F&action=form")
-            # driver.find_element_by_xpath("//select[@id='fldQuestion_48159F9B94B2409BAF899C57039D3759_C3E2410FA55F43CA84D9FA6426910A93']/option[text()='Yes']").click()
-            # update = driver.find_element_by_class_name("saveButton")
-            # update.click()
+            driver.get("https://parents.genesisedu.com/ftlee/parents?tab1=studentdata&tab2=forms&tab3=fill&studentid=29060860&formId=CE0A72E9B67E45DE8FDF5124EF25D83F&action=form")
+            driver.find_element_by_xpath("//select[@id='fldQuestion_48159F9B94B2409BAF899C57039D3759_C3E2410FA55F43CA84D9FA6426910A93']/option[text()='Yes']").click()
+            update = driver.find_element_by_class_name("saveButton")
+            update.click()
 
-            # forms = WebDriverWait(driver, 5).until(
-            #     EC.presence_of_all_elements_located((By.NAME, "cellCenter"))
-            # )
+            forms = WebDriverWait(driver, 5).until(
+                 EC.presence_of_all_elements_located((By.NAME, "cellCenter"))
+            )
             
-            # currentDate = datetime.now().strftime("%m/%d/%Y").lstrip("0").replace(" 0", " ")
-            # logger.info('result contains the latest date: {}'.format(currentDate in forms[2].get_attribute('innerHTML')))
+            currentDate = datetime.now().strftime("%m/%d/%Y").lstrip("0").replace(" 0", " ")
+            logger.info('result contains the latest date: {}'.format(currentDate in forms[2].get_attribute('innerHTML')))
 
             driver.save_screenshot(filename)
         finally:
