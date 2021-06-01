@@ -124,7 +124,7 @@ class WebDriverScreenshot:
             update.click()
 
             forms = WebDriverWait(driver, 5).until(
-                 EC.presence_of_all_elements_located((By.NAME, "cellCenter"))
+                 EC.presence_of_all_elements_located((By.CLASS_NAME, "cellCenter"))
             )
             
             currentDate = datetime.now().strftime("%m/%d/%Y").lstrip("0").replace(" 0", " ")
