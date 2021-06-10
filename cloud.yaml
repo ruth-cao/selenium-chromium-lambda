@@ -68,6 +68,14 @@ Resources:
                             - 's3:PutObject'
                             Resource: 
                                 Fn::Join: ["", ["arn:aws:s3:::", Ref: "BucketName", "/*"]] 
+                -   PolicyName: Allow-sns
+                    PolicyDocument:
+                        Version: '2012-10-17'
+                        Statement:
+                        -   Effect: Allow
+                            Action:
+                            - 'SNS:Publish'
+                            Resource: arn:aws:sns:*:*:*
                 
 
     ScreenshotFunction:
@@ -92,7 +100,7 @@ Resources:
                         Ref: Email
                     Pwd:
                         Ref: Pwd
-                    TopicArn
+                    TopicArn:
                         Ref: TopicArn
             Timeout: 60
             MemorySize: 2048
