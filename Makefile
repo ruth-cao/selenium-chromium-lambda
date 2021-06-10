@@ -43,7 +43,7 @@ deploy-layer:
 ## usage:	make BUCKET=your_bucket_name Email=your_email Pwd=your_pwd TopicArn=your_arn create-stack 
 create-stack: 	
 	aws s3 cp deploy.zip s3://${BUCKET}/src/ScreenshotFunction.zip
-	aws cloudformation create-stack --stack-name LambdaScreenshot --template-body file://cloud.yaml --parameters ParameterKey=BucketName,ParameterValue=${BUCKET} ParameterKey=Email,ParameterValue=${Email} ParameterKey=Pwd,ParameterValue=${Pwd} --capabilities CAPABILITY_IAM
+	aws cloudformation create-stack --stack-name LambdaScreenshot --template-body file://cloud.yaml --parameters ParameterKey=BucketName,ParameterValue=${BUCKET} ParameterKey=Email,ParameterValue=${Email} ParameterKey=Pwd,ParameterValue=${Pwd} ParameterKey=TopicArn,ParameterValue=${TopicArn} --capabilities CAPABILITY_IAM
 
 ## delete existing stack
 delete-stack: 

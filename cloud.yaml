@@ -29,7 +29,7 @@ Parameters:
         Description: pwd to login
         Type: String
     
-    TopicArn
+    TopicArn:
         Description: The SNS topic to send the notification with result
         Type: String
 
