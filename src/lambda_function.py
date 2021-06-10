@@ -17,8 +17,8 @@ def lambda_handler(event, context):
     driver = WebDriverScreenshot()
 
     logger.info('Fill the form and save screenshot')
-    driver.save_screenshot(os.environ['URL'], os.environ['Email'], os.environ['Pwd'], '/tmp/{}-final.png'.format(screenshot_file))
-
+    result = driver.save_screenshot(os.environ['URL'], os.environ['Email'], os.environ['Pwd'], '/tmp/{}-final.png'.format(screenshot_file))
+     
     driver.close()
 
     if all (k in os.environ for k in ('BUCKET','DESTPATH')):
@@ -26,3 +26,9 @@ def lambda_handler(event, context):
         s3.upload_file('/tmp/{}-final.png'.format(screenshot_file), 
                     os.environ['BUCKET'], 
                     '{}/{}-final.png'.format(os.environ['DESTPATH'], screenshot_file))
+
+    sns = boto3.client('sns')
+    sns.publish(
+          TopicArn=os.environ['TopicArn'],
+          Message='the result code is {0}'.format(result),
+          Subject='The daily form filling is completed')

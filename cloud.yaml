@@ -28,6 +28,10 @@ Parameters:
     Pwd:
         Description: pwd to login
         Type: String
+    
+    TopicArn
+        Description: The SNS topic to send the notification with result
+        Type: String
 
 Resources:
 
@@ -88,6 +92,8 @@ Resources:
                         Ref: Email
                     Pwd:
                         Ref: Pwd
+                    TopicArn
+                        Ref: TopicArn
             Timeout: 60
             MemorySize: 2048
             Code:

@@ -127,11 +127,12 @@ class WebDriverScreenshot:
                  EC.presence_of_all_elements_located((By.CLASS_NAME, "cellCenter"))
             )
             
-            currentDate = datetime.now().strftime("%m/%d/%Y").lstrip("0").replace(" 0", " ")
+            currentDate = datetime.now().strftime("%-m/%-d/%Y")
             logger.info(currentDate)
-            logger.info(forms[2].get_attribute('innerHTML'))
+            logger.info(currentDate in forms[2].get_attribute('innerHTML'))
 
             driver.save_screenshot(filename)
+            return currentDate in forms[2].get_attribute('innerHTML')
         finally:
            driver.quit()
 
