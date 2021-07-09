@@ -64,7 +64,17 @@ Resources:
                             Action:
                             - 'sns:Publish'
                             Resource: arn:aws:sns:*:*:*
-                
+                -   PolicyName: Allow-parameter
+                    PolicyDocument:
+                        Version: '2012-10-17'
+                        Statement:
+                        -   Effect: Allow
+                            Action:
+                            - 'ssm:GetParameter'
+                            Resource: 
+                            - arn:aws:ssm:us-east-1:775597156514:parameter/screenshot/*
+                            - arn:aws:ssm:us-east-1:775597156514:parameter/*
+
 
     ScreenshotFunction:
         Type: AWS::Lambda::Function
