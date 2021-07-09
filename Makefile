@@ -40,10 +40,10 @@ deploy-layer:
    aws s3 cp layer.zip s3://${BUCKET}/src/SeleniumChromiumLayer.zip
 
 ## create CloudFormation stack with lambda function and role.
-## usage:	make BUCKET=your_bucket_name Email=your_email Pwd=your_pwd TopicArn=your_arn create-stack 
+## usage:	make BUCKET=your_bucket_name create-stack 
 create-stack: 	
 	aws s3 cp deploy.zip s3://${BUCKET}/src/ScreenshotFunction.zip
-	aws cloudformation create-stack --stack-name LambdaScreenshot --template-body file://cloud.yaml --parameters ParameterKey=BucketName,ParameterValue=${BUCKET} ParameterKey=Email,ParameterValue=${Email} ParameterKey=Pwd,ParameterValue=${Pwd} ParameterKey=TopicArn,ParameterValue=${TopicArn} --capabilities CAPABILITY_IAM
+	aws cloudformation create-stack --stack-name LambdaScreenshot --template-body file://cloud.yaml --parameters ParameterKey=BucketName,ParameterValue=${BUCKET} --capabilities CAPABILITY_IAM
 
 ## delete existing stack
 delete-stack: 
@@ -51,7 +51,7 @@ delete-stack:
 
 
 ## update CloudFormation stack with lambda function and role.
-## usage:	make BUCKET=your_bucket_name Email=your_email Pwd=your_pwd TopicArn=your_arn update-stack 
+## usage:	make BUCKET=your_bucket_name update-stack 
 update-stack: 	
 	aws s3 cp deploy.zip s3://${BUCKET}/src/ScreenshotFunction.zip
-	aws cloudformation update-stack --stack-name LambdaScreenshot --template-body file://cloud.yaml --parameters ParameterKey=BucketName,ParameterValue=${BUCKET} ParameterKey=Email,ParameterValue=${Email} ParameterKey=Pwd,ParameterValue=${Pwd} ParameterKey=TopicArn,ParameterValue=${TopicArn} --capabilities CAPABILITY_IAM
+	aws cloudformation update-stack --stack-name LambdaScreenshot --template-body file://cloud.yaml --parameters ParameterKey=BucketName,ParameterValue=${BUCKET} --capabilities CAPABILITY_IAM

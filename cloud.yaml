@@ -20,18 +20,6 @@ Parameters:
         Description: folder in S3 Bucket where store screenshots
         Type: String
         Default: "screenshots"
-        
-    Email:
-        Description: email to login
-        Type: String
-
-    Pwd:
-        Description: pwd to login
-        Type: String
-    
-    TopicArn:
-        Description: The SNS topic to send the notification with result
-        Type: String
 
 Resources:
 
@@ -96,14 +84,8 @@ Resources:
                         Ref: BucketName
                     DESTPATH:
                         Ref: ScreenshotsFolder
-                    Email:
-                        Ref: Email
-                    Pwd:
-                        Ref: Pwd
-                    TopicArn:
-                        Ref: TopicArn
             Timeout: 60
-            MemorySize: 2048
+            MemorySize: 512
             Code:
                 S3Bucket: 
                     Ref: BucketName
@@ -131,7 +113,7 @@ Resources:
             Name: 'FormScheduleRule'
             Description: 'Trigger 7.30 p.m. NYT'
             ScheduleExpression: 'cron(30 23 ? * 1-5 *)'
-            State: 'ENABLED'
+            State: 'DISABLED'
             Targets: 
                - 
                  Arn:
